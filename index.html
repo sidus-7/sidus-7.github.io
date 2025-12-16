@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Michael Chance | Developer</title>
+    <title>Michael Chance | sidus-7</title>
     <style>
         /* --- BRUTALIST RESET --- */
         * {
@@ -13,16 +13,30 @@
         }
 
         :root {
-            --bg-color: #e0e0e0;       /* Concrete Grey */
-            --text-color: #0a0a0a;     /* Ink Black */
-            --accent-color: #4169E1;   /* Royal Blue */
-            --border-thick: 4px solid var(--text-color);
-            --border-thin: 2px solid var(--text-color);
+            /* --- DARK INDUSTRIAL PALETTE --- */
+            --bg-color: #000000;        /* Pure Void */
+            --container-bg: #050505;    /* Almost Black */
+            --text-color: #bbbbbb;      /* Dimmed Grey */
+            --text-dim: #555555;        /* Very dark grey for metadata */
+            
+            /* Deep Abyssal Navy */
+            --accent-color: #142850;    
+            --accent-text: #2c4a7c; 
+
+            /* Borders */
+            --border-color: #222222;    
+            --border-thick: 4px solid var(--border-color);
+            --border-thin: 2px solid var(--border-color);
+            
+            /* Terminal Specifics */
+            --terminal-bg: #111;
+            --terminal-text: #00ff00; /* Retro Green */
+            
             --spacing: 2rem;
         }
 
         body {
-            font-family: 'Courier New', Courier, monospace; /* Industrial Monospace */
+            font-family: 'Courier New', Courier, monospace;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.4;
@@ -34,8 +48,9 @@
             max-width: 900px;
             margin: 0 auto;
             border: var(--border-thick);
-            background-color: #fff;
-            box-shadow: 10px 10px 0px var(--accent-color); /* Hard shadow */
+            background-color: var(--container-bg);
+            box-shadow: 15px 15px 0px var(--accent-color);
+            margin-bottom: 50px;
         }
 
         /* --- TYPOGRAPHY --- */
@@ -43,15 +58,15 @@
             text-transform: uppercase;
             font-weight: 900;
             letter-spacing: -1px;
+            color: #eeeeee; 
         }
 
-        p {
-            margin-bottom: 1rem;
-        }
+        p { margin-bottom: 1rem; }
+        strong { color: #fff; }
 
-        /* --- HEADER SECTION --- */
+        /* --- HEADER --- */
         header {
-            background-color: var(--text-color);
+            background-color: #080808; 
             color: #fff;
             padding: var(--spacing);
             border-bottom: var(--border-thick);
@@ -60,13 +75,53 @@
         header h1 {
             font-size: 3rem;
             line-height: 1;
+            text-shadow: 4px 4px 0px var(--accent-color);
         }
 
         .subtitle {
-            color: var(--accent-color);
+            color: var(--accent-text); 
             font-weight: bold;
             margin-top: 0.5rem;
             font-size: 1.2rem;
+        }
+
+        /* --- TERMINAL SECTION --- */
+        .terminal-section {
+            padding: 0;
+            border-bottom: var(--border-thick);
+            background-color: var(--terminal-bg);
+            color: var(--terminal-text);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .terminal-header {
+            background-color: #1a1a1a;
+            color: #555;
+            padding: 5px 10px;
+            font-size: 0.8rem;
+            border-bottom: 1px solid #333;
+            text-transform: uppercase;
+        }
+
+        .terminal-window {
+            padding: 1rem;
+            height: 200px;
+            overflow-y: auto;
+            font-size: 0.9rem;
+        }
+
+        .output-line { display: block; margin-bottom: 5px; }
+        .input-line { display: flex; }
+        .prompt { color: var(--accent-text); margin-right: 10px; }
+        
+        input#cmd-input {
+            background: transparent;
+            border: none;
+            color: var(--terminal-text);
+            font-family: inherit;
+            width: 100%;
+            outline: none;
+            caret-color: var(--terminal-text);
         }
 
         /* --- SECTIONS GENERAL --- */
@@ -75,75 +130,190 @@
             border-bottom: var(--border-thick);
         }
 
-        section:last-child {
-            border-bottom: none;
-        }
-
         .section-title {
             background-color: var(--accent-color);
-            color: #fff;
+            color: #ccc; 
             display: inline-block;
             padding: 5px 10px;
             margin-bottom: 1.5rem;
             font-size: 1.5rem;
+            border: 1px solid #333; 
+            box-shadow: 4px 4px 0px #000;
         }
 
-        /* --- ABOUT SECTION --- */
+        /* --- ABOUT & STATS --- */
         .bio-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 2fr 1fr;
             gap: 2rem;
         }
+
+        .bio-text { font-size: 1.05rem; }
 
         .stat-box {
             border: var(--border-thin);
             padding: 1rem;
+            margin-bottom: -2px; 
+            background: #080808; 
         }
 
         .stat-label {
             display: block;
             font-weight: bold;
-            text-decoration: underline;
+            background: var(--accent-color); 
+            color: #bbb;
+            padding: 2px 5px;
             margin-bottom: 0.5rem;
-            color: var(--accent-color);
+            display: inline-block;
+            font-size: 0.8rem;
         }
 
-        ul.hobbies {
-            list-style-type: square;
-            padding-left: 1.5rem;
+        .progress-bar {
+            font-weight: bold;
+            color: var(--accent-text);
+            margin-top: 10px;
+            font-family: monospace;
+            background: #080808;
+            padding: 5px;
+            border: 1px solid #222;
+            display: inline-block;
         }
 
-        /* --- PROJECTS SECTION --- */
+        /* --- TECH STACK --- */
+        .tech-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tech-item {
+            border: 1px solid var(--accent-color);
+            padding: 0.5rem 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            background: #050505;
+            color: #888;
+            box-shadow: 4px 4px 0px #111;
+            transition: transform 0.1s;
+        }
+
+        .tech-item:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--accent-color);
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        /* --- PROJECTS --- */
         .project-list {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 0; /* Touching borders */
+            gap: 1.5rem;
         }
 
         .project-card {
             border: var(--border-thin);
             padding: 1.5rem;
-            margin-bottom: -2px; /* Overlap borders to prevent double thickness */
-            transition: background-color 0.2s;
+            position: relative;
+            background: #080808;
         }
 
-        .project-card:hover {
-            background-color: #f4f4f4;
+        .project-card.placeholder {
+            border: 2px dashed #222;
+            background-color: #000;
+            color: #333;
         }
 
         .project-header {
             display: flex;
             justify-content: space-between;
-            align-items: baseline;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-            border-bottom: 1px solid #ccc;
+            align-items: center;
+            border-bottom: 2px solid #222;
             padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .date-badge {
+            font-size: 0.8rem;
+            background: var(--accent-color);
+            color: #aaa;
+            padding: 2px 6px;
+        }
+
+        /* --- NOW PLAYING & PONG --- */
+        .now-playing {
+            margin-top: 2rem;
+            border: var(--border-thin);
+            padding: 1rem;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            box-shadow: inset 0 0 10px #111;
+        }
+
+        .playing-icon {
+            width: 20px;
+            height: 20px;
+            background-color: #8b0000; 
+            border-radius: 50%;
+            animation: blink 1s infinite;
+            box-shadow: 0 0 5px #ff0000; 
+        }
+
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        /* Pong Container */
+        .pong-container {
+            margin-top: 2rem;
+            border: var(--border-thin);
+            background: #000;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        canvas#pongCanvas {
+            background-color: #000;
+            border: 1px solid var(--terminal-text);
+            display: block;
+            margin: 0 auto;
+            width: 100%; /* Responsive width */
+            image-rendering: pixelated;
+            cursor: none; /* Hide cursor over game */
+        }
+
+        .pong-ui {
+            margin-top: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+        }
+
+        button#pong-start {
+            background: var(--terminal-text);
+            color: #000;
+            border: none;
+            padding: 5px 10px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        button#pong-start:hover {
+            background: #fff;
         }
 
         /* --- LINKS & BUTTONS --- */
         a {
-            color: var(--text-color);
+            color: #ddd;
             text-decoration: none;
             border-bottom: 2px solid var(--accent-color);
             font-weight: bold;
@@ -152,24 +322,27 @@
 
         a:hover {
             background-color: var(--accent-color);
-            color: #fff;
+            color: #bbb;
+            box-shadow: 0 0 15px var(--accent-color);
         }
 
         .btn {
             display: inline-block;
-            background-color: var(--text-color);
-            color: #fff;
+            background-color: var(--accent-color);
+            color: #ccc;
             padding: 10px 20px;
             border: none;
             cursor: pointer;
             margin-top: 10px;
-            border-bottom: none; /* Override default link style */
+            border-bottom: none; 
+            font-family: inherit;
+            font-weight: bold;
         }
 
         .btn:hover {
-            background-color: var(--accent-color);
-            color: #fff;
-            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+            background-color: #fff;
+            color: #000;
+            box-shadow: 4px 4px 0px rgba(255,255,255,0.2);
         }
 
         /* --- SOCIALS --- */
@@ -180,23 +353,25 @@
         }
 
         .social-links a {
-            font-size: 1.2rem;
-            border: var(--border-thin);
+            border: 1px solid #333;
             padding: 1rem;
-            border-bottom: var(--border-thin); /* Reset link style */
+            border-bottom: 1px solid #333; 
+            background: #0a0a0a;
         }
         
         .social-links a:hover {
-            box-shadow: 5px 5px 0px var(--accent-color);
+            border-color: var(--accent-color);
+            background-color: var(--accent-color);
+            color: #bbb;
+            box-shadow: 5px 5px 0px #000;
             transform: translate(-2px, -2px);
         }
 
-        /* --- MOBILE RESPONSIVENESS --- */
+        /* --- MOBILE --- */
         @media (max-width: 600px) {
             header h1 { font-size: 2rem; }
             .bio-grid { grid-template-columns: 1fr; }
             body { padding: 10px; }
-            .container { box-shadow: 5px 5px 0px var(--accent-color); }
         }
     </style>
 </head>
@@ -206,65 +381,122 @@
         
         <header>
             <h1>MICHAEL CHANCE</h1>
-            <div class="subtitle">>> ASPIRING DEVELOPER // MD, US</div>
+            <div class="subtitle">>> STUDENT DEV // MD, US // SIDUS-7</div>
         </header>
+
+        <div class="terminal-section">
+            <div class="terminal-header">SYS_ROOT: INTERACTIVE CONSOLE v1.0 (Type 'help')</div>
+            <div class="terminal-window" id="terminal-output">
+                <div class="output-line">Last login: Today from 127.0.0.1</div>
+                <div class="output-line">Welcome, user. Type 'help' to see commands.</div>
+            </div>
+            <div style="padding: 10px; border-top: 1px solid #333;">
+                <div class="input-line">
+                    <span class="prompt">guest@sidus-7:~$</span>
+                    <input type="text" id="cmd-input" autocomplete="off" autofocus>
+                </div>
+            </div>
+        </div>
 
         <section id="about">
             <h2 class="section-title">01. STATUS_REPORT</h2>
             <div class="bio-grid">
                 <div class="bio-text">
                     <p>
-                        Born and raised in Maryland. I am a hardworking and detailed developer focused on building functional, robust software. 
+                        <strong>>> SYSTEM UPDATE:</strong> Currently running on caffeine and determination. 
                     </p>
                     <p>
-                        I approach coding with an amiable but disciplined mindset. I believe in clean architecture and raw functionality.
+                        I'm an aspiring developer and CS undergrad with about <strong>1 year left on the clock</strong> before my v1.0 release (Bachelor's Degree). When I'm not fighting segmentation faults in C++ or optimizing Java, I'm probably fighting bosses in Dark Souls.
                     </p>
+                    <p>
+                        I treat coding like a refined RPG: grind the skills, squash the bugs, and don't stop until the build is clean. Amiable, detailed, and ready to learn.
+                    </p>
+                    
+                    <div class="progress-bar">
+                        DEGREE_PROGRESS: [||||||||||||||||||..] 90%
+                    </div>
+                    
+                    <h3 style="margin-top: 2rem; font-size: 1rem; color: var(--text-dim);">>> WEAPON_INVENTORY (LANGUAGES)</h3>
+                    <div class="tech-grid">
+                        <div class="tech-item">Java</div>
+                        <div class="tech-item">C / C++</div>
+                        <div class="tech-item">Python</div>
+                        <div class="tech-item">HTML / CSS</div>
+                        <div class="tech-item">Lua</div>
+                    </div>
                 </div>
+
                 <div class="bio-stats">
                     <div class="stat-box">
-                        <span class="stat-label">CURRENT_READING:</span>
-                        The Starfishers Trilogy (Sci-Fi)
-                    </div>
-                    <div class="stat-box" style="margin-top: -2px;"> <span class="stat-label">HOBBIES:</span>
-                        <ul class="hobbies">
+                        <span class="stat-label">HOBBIES</span>
+                        <ul style="padding-left: 1.5rem; list-style: square;">
                             <li>Music Production</li>
                             <li>Gaming</li>
-                            <li>Sci-Fi Literature</li>
+                            <li>Sci-Fi Novels (Starfishers)</li>
                         </ul>
                     </div>
+                    
+                    <div class="now-playing">
+                        <div class="playing-icon"></div>
+                        <div>
+                            <div style="font-size: 0.7rem; color: #555;">CURRENT_ACTIVITY</div>
+                            <div style="font-weight: bold; color: var(--accent-text);">DARK SOULS 3</div>
+                            <div style="font-size: 0.8rem;">Soul Level 1 Run</div>
+                        </div>
+                    </div>
+
+                    <div class="pong-container">
+                        <div style="font-size: 0.7rem; color: var(--terminal-text); margin-bottom: 5px; text-align: left;">
+                            >> SYSTEM_GAME // USER_VS_AI
+                        </div>
+                        <canvas id="pongCanvas" width="250" height="200"></canvas>
+                        <div class="pong-ui">
+                            <span id="pong-score" style="color: var(--terminal-text);">0 - 0</span>
+                            <button id="pong-start">[INITIALIZE]</button>
+                        </div>
+                        <div style="font-size: 0.6rem; color: #555; margin-top:5px;">MOUSE: CONTROL LEFT PADDLE</div>
+                    </div>
+
                 </div>
             </div>
         </section>
-
+	
+ 	
         <section id="projects">
             <h2 class="section-title">02. DEPLOYMENTS</h2>
             <div class="project-list">
                 
                 <article class="project-card">
                     <div class="project-header">
-                        <h3>PROJECT_ALPHA</h3>
-                        <span>[Python / Automation]</span>
+                        <h3>MY_OWN_GIT</h3>
+                        <span class="date-badge">START: 2025-12-03</span>
                     </div>
-                    <p>A script designed to automate daily file sorting tasks. Utilizes OS libraries to organize messy directories based on file extensions.</p>
-                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                    <p>A recreation of the Git version control system from scratch. Built to understand the internal mechanics of VCS, hashing, and file tracking.</p>
+                    <a href="https://github.com/sidus-7/MyOwnGit" target="_blank" class="btn">VIEW REPO :: GITHUB</a>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card placeholder">
                     <div class="project-header">
-                        <h3>WEB_SCRAPER_V1</h3>
-                        <span>[JavaScript / Node.js]</span>
+                        <h3>[EMPTY_SLOT_02]</h3>
+                        <span class="date-badge" style="background:#222;">STATUS: PENDING</span>
                     </div>
-                    <p>Industrial data collection tool. Scrapes public pricing data from target e-commerce sites and outputs to CSV format.</p>
-                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                    <p>>> Awaiting deployment. Project data corrupted or not yet initialized.</p>
+                </article>
+		
+		<article class="project-card placeholder">
+                    <div class="project-header">
+                        <h3>[EMPTY_SLOT_03]</h3>
+                        <span class="date-badge" style="background:#222;">STATUS: PENDING</span>
+                    </div>
+                    <p>>> Awaiting deployment. Project data corrupted or not yet initialized.</p>
                 </article>
 
-                <article class="project-card">
+                <article class="project-card placeholder">
                     <div class="project-header">
-                        <h3>AUDIO_VISUALIZER</h3>
-                        <span>[C++ / Graphics]</span>
+                        <h3>[EMPTY_SLOT_04]</h3>
+                        <span class="date-badge" style="background:#222;">STATUS: PENDING</span>
                     </div>
-                    <p>Real-time audio frequency visualization. Combines my love for music with low-level graphics programming.</p>
-                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                    <p>>> Awaiting deployment. Project data corrupted or not yet initialized.</p>
                 </article>
 
             </div>
@@ -274,14 +506,319 @@
             <h2 class="section-title">03. COMMUNICATION</h2>
             <p>Initiate contact protocols via the channels below:</p>
             <div class="social-links">
-                <a href="https://github.com/yourusername" target="_blank">GITHUB</a>
-                <a href="https://linkedin.com/in/yourusername" target="_blank">LINKEDIN</a>
-                <a href="mailto:your.email@example.com">EMAIL</a>
+                <a href="https://github.com/sidus-7" target="_blank">GITHUB (sidus-7)</a>
+                <a href="https://www.linkedin.com/in/michael-chance-a70ab3354/" target="_blank">LINKEDIN</a>
+                <a href="mailto:mdchance2003@gmail.com">EMAIL</a>
             </div>
         </section>
 
     </div>
 
+    <script>
+        const input = document.getElementById('cmd-input');
+        const output = document.getElementById('terminal-output');
+
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const command = input.value.trim().toLowerCase();
+                const newLine = document.createElement('div');
+                newLine.className = 'output-line';
+                newLine.innerHTML = `<span style="color:#2c4a7c">guest@sidus-7:~$</span> ${input.value}`;
+                output.appendChild(newLine);
+
+                let response = '';
+
+                switch(command) {
+                    case 'help':
+                        response = 'AVAILABLE COMMANDS: [about] [projects] [socials] [clear] [date]';
+                        break;
+                    case 'about':
+                        response = 'CS Student (1 yr left). Dark Souls veteran. Currently debugging life & code.';
+                        break;
+                    case 'projects':
+                        response = 'Listing projects... Loaded: MyOwnGit. 2 slots empty.';
+                        break;
+                    case 'socials':
+                        response = 'GitHub: sidus-7 | Email: mdchance2003@gmail.com';
+                        break;
+                    case 'date':
+                        response = new Date().toString();
+                        break;
+                    case 'clear':
+                        output.innerHTML = '';
+                        input.value = '';
+                        return; 
+                    case '':
+                        response = '';
+                        break;
+                    default:
+                        response = `Command '${command}' not found. Type 'help' for list.`;
+                }
+
+                if(response) {
+                    const respLine = document.createElement('div');
+                    respLine.className = 'output-line';
+                    respLine.style.color = '#fff';
+                    respLine.innerText = `>> ${response}`;
+                    output.appendChild(respLine);
+                }
+
+                output.scrollTop = output.scrollHeight;
+                input.value = '';
+            }
+        });
+    </script>
+
+    <script>
+        const canvas = document.getElementById('pongCanvas');
+        const ctx = canvas.getContext('2d');
+        const btn = document.getElementById('pong-start');
+        const scoreDisplay = document.getElementById('pong-score');
+
+        // Game objects
+        const START_SPEED = 1.0;
+        const SPEED_INCREMENT = 0.3; 
+        const MAX_SPEED = 4.5; 
+
+        const ball = { x: canvas.width/2, y: canvas.height/2, dx: START_SPEED, dy: START_SPEED, r: 4 };
+        const paddleH = 40, paddleW = 6;
+        const user = { x: 0, y: canvas.height/2 - paddleH/2, score: 0 };
+        const ai = { x: canvas.width - paddleW, y: canvas.height/2 - paddleH/2, score: 0 };
+
+        let isRunning = false;
+        let animationId;
+        
+        // STATES
+        let countdownValue = 0;
+        let countdownTimer = null;
+        let isScorecardActive = false;
+        let scorecardTimer = null;
+        let scorerName = "";
+
+        // FIXED MOUSE CONTROL
+        canvas.addEventListener('mousemove', (evt) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseY = evt.clientY - rect.top;
+            user.y = mouseY - paddleH/2;
+            
+            if(user.y < 0) user.y = 0;
+            if(user.y + paddleH > canvas.height) user.y = canvas.height - paddleH;
+        });
+
+        function resetPositions() {
+            ball.x = canvas.width/2;
+            ball.y = canvas.height/2;
+            
+            let direction = (ball.dx > 0) ? -1 : 1;
+            
+            ball.dx = direction * START_SPEED; 
+            ball.dy = (Math.random() * 2) - 1; 
+
+            // RESET AI
+            ai.y = canvas.height/2 - paddleH/2;
+        }
+
+        function startCountdown() {
+            countdownValue = 3;
+            if(countdownTimer) clearInterval(countdownTimer);
+            
+            countdownTimer = setInterval(() => {
+                countdownValue--;
+                if(countdownValue <= 0) {
+                    clearInterval(countdownTimer);
+                }
+            }, 1000);
+        }
+
+        function handleScore(who) {
+            isScorecardActive = true;
+            scorerName = who;
+            
+            // Wait 2 seconds showing the scorecard
+            if(scorecardTimer) clearTimeout(scorecardTimer);
+            scorecardTimer = setTimeout(() => {
+                isScorecardActive = false;
+                resetPositions();
+                startCountdown();
+            }, 2000);
+        }
+
+        function drawRect(x, y, w, h, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, w, h);
+        }
+
+        function drawCircle(x, y, r, color) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI*2, false);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        function draw() {
+            drawRect(0, 0, canvas.width, canvas.height, '#000');
+            
+            // Draw Net
+            for(let i=0; i<canvas.height; i+=15) {
+                drawRect(canvas.width/2 - 1, i, 2, 5, '#004400');
+            }
+
+            drawRect(user.x, user.y, paddleW, paddleH, '#00ff00');
+            drawRect(ai.x, ai.y, paddleW, paddleH, '#00ff00');
+            
+            // Only draw ball if game is actually running (not in scorecard phase)
+            // But we can leave it; it will just be frozen off screen. 
+            // Better visual: Don't draw ball if Scorecard is active.
+            if (!isScorecardActive) {
+                drawCircle(ball.x, ball.y, ball.r, '#00ff00');
+            }
+
+            // DRAW SCORECARD
+            if (isScorecardActive) {
+                ctx.fillStyle = "#00ff00";
+                ctx.font = "bold 16px Courier New";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(`>> ${scorerName} SCORED`, canvas.width/2, canvas.height/2);
+            } 
+            // DRAW COUNTDOWN
+            else if (countdownValue > 0) {
+                ctx.fillStyle = "#00ff00";
+                ctx.font = "bold 40px Courier New";
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillText(countdownValue, canvas.width/2, canvas.height/2);
+            }
+        }
+
+        function update() {
+            if(!isRunning) return;
+
+            // FREEZE GAME IF COUNTING DOWN OR SHOWING SCORECARD
+            if(countdownValue > 0 || isScorecardActive) return;
+
+            // Ball movement
+            ball.x += ball.dx;
+            ball.y += ball.dy;
+
+            // Wall collision (Top/Bottom)
+            if(ball.y + ball.r > canvas.height || ball.y - ball.r < 0) {
+                ball.dy = -ball.dy;
+            }
+
+            // --- ADAPTIVE AI LOGIC ---
+            let currentBallSpeed = Math.abs(ball.dx);
+            
+            let aiSpeed = currentBallSpeed * 0.85; 
+            if (user.score >= 3) aiSpeed = currentBallSpeed * 1.1; 
+
+            let aiCenter = ai.y + paddleH/2;
+            
+            if (aiCenter < ball.y - 10) {
+                ai.y += aiSpeed;
+            } else if (aiCenter > ball.y + 10) {
+                ai.y -= aiSpeed;
+            }
+
+            if(ai.y < 0) ai.y = 0;
+            if(ai.y + paddleH > canvas.height) ai.y = canvas.height - paddleH;
+
+            // Paddle Collision logic
+            let player = (ball.x < canvas.width/2) ? user : ai;
+            
+            if (collision(ball, player)) {
+                let collidePoint = ball.y - (player.y + paddleH/2);
+                collidePoint = collidePoint / (paddleH/2);
+                
+                let angleRad = collidePoint * (Math.PI/4); 
+
+                let direction = (ball.x < canvas.width/2) ? 1 : -1;
+                
+                // SPEED BUILD UP
+                let currentSpeed = Math.sqrt(ball.dx*ball.dx + ball.dy*ball.dy);
+                let newSpeed = currentSpeed + SPEED_INCREMENT;
+                if(newSpeed > MAX_SPEED) newSpeed = MAX_SPEED;
+
+                ball.dx = direction * newSpeed * Math.cos(angleRad);
+                ball.dy = newSpeed * Math.sin(angleRad);
+            }
+
+            // Scoring
+            // Left Wall (AI Scores)
+            if(ball.x + ball.r < 0) {
+                ai.score++;
+                scoreDisplay.innerText = `${user.score} - ${ai.score}`;
+                handleScore("CPU");
+            } 
+            // Right Wall (User Scores)
+            else if(ball.x - ball.r > canvas.width) {
+                user.score++;
+                scoreDisplay.innerText = `${user.score} - ${ai.score}`;
+                handleScore("UNIT_01");
+            }
+        }
+
+        function collision(b, p) {
+            b.top = b.y - b.r;
+            b.bottom = b.y + b.r;
+            b.left = b.x - b.r;
+            b.right = b.x + b.r;
+
+            p.top = p.y;
+            p.bottom = p.y + paddleH;
+            p.left = p.x;
+            p.right = p.x + paddleW;
+
+            return b.right > p.left && b.bottom > p.top && b.left < p.right && b.top < p.bottom;
+        }
+
+        function gameLoop() {
+            update();
+            draw();
+            if(isRunning) {
+                animationId = requestAnimationFrame(gameLoop);
+            }
+        }
+
+        btn.addEventListener('click', () => {
+            if(isRunning) {
+                // STOPPING
+                isRunning = false;
+                cancelAnimationFrame(animationId);
+                
+                // Clear Timers
+                if(countdownTimer) clearInterval(countdownTimer);
+                if(scorecardTimer) clearTimeout(scorecardTimer);
+                
+                countdownValue = 0;
+                isScorecardActive = false;
+                
+                user.score = 0;
+                ai.score = 0;
+                scoreDisplay.innerText = "0 - 0";
+                
+                resetPositions();
+                btn.innerText = "[INITIALIZE]";
+                draw(); 
+            } else {
+                // STARTING
+                isRunning = true;
+                user.score = 0;
+                ai.score = 0;
+                scoreDisplay.innerText = "0 - 0";
+                
+                resetPositions();
+                startCountdown();
+                
+                btn.innerText = "[RESTART_SYSTEM]";
+                gameLoop();
+            }
+        });
+
+        // Initial draw
+        resetPositions();
+        draw();
+    </script>
 </body>
 </html>
-

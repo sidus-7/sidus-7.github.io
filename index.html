@@ -1,14 +1,287 @@
 <!DOCTYPE html>
-<html>
-	<head>
-	<title>hello</title>
-   
-  		<style>
-    			body { font-family: Arial; background: #f9f9f9; text-align: center; }
-    			h1 { color: #333; }
-  		</style>
-	</head>
-	<body>
-  		<p>just a test site. ;)</p>
-	</body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael Chance | Developer</title>
+    <style>
+        /* --- BRUTALIST RESET --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-color: #e0e0e0;       /* Concrete Grey */
+            --text-color: #0a0a0a;     /* Ink Black */
+            --accent-color: #4169E1;   /* Royal Blue */
+            --border-thick: 4px solid var(--text-color);
+            --border-thin: 2px solid var(--text-color);
+            --spacing: 2rem;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace; /* Industrial Monospace */
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.4;
+            padding: var(--spacing);
+        }
+
+        /* --- LAYOUT CONTAINER --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            border: var(--border-thick);
+            background-color: #fff;
+            box-shadow: 10px 10px 0px var(--accent-color); /* Hard shadow */
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 {
+            text-transform: uppercase;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            background-color: var(--text-color);
+            color: #fff;
+            padding: var(--spacing);
+            border-bottom: var(--border-thick);
+        }
+
+        header h1 {
+            font-size: 3rem;
+            line-height: 1;
+        }
+
+        .subtitle {
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-top: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* --- SECTIONS GENERAL --- */
+        section {
+            padding: var(--spacing);
+            border-bottom: var(--border-thick);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            background-color: var(--accent-color);
+            color: #fff;
+            display: inline-block;
+            padding: 5px 10px;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        /* --- ABOUT SECTION --- */
+        .bio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .stat-box {
+            border: var(--border-thin);
+            padding: 1rem;
+        }
+
+        .stat-label {
+            display: block;
+            font-weight: bold;
+            text-decoration: underline;
+            margin-bottom: 0.5rem;
+            color: var(--accent-color);
+        }
+
+        ul.hobbies {
+            list-style-type: square;
+            padding-left: 1.5rem;
+        }
+
+        /* --- PROJECTS SECTION --- */
+        .project-list {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 0; /* Touching borders */
+        }
+
+        .project-card {
+            border: var(--border-thin);
+            padding: 1.5rem;
+            margin-bottom: -2px; /* Overlap borders to prevent double thickness */
+            transition: background-color 0.2s;
+        }
+
+        .project-card:hover {
+            background-color: #f4f4f4;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 0.5rem;
+        }
+
+        /* --- LINKS & BUTTONS --- */
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            border-bottom: 2px solid var(--accent-color);
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--text-color);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-bottom: none; /* Override default link style */
+        }
+
+        .btn:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+            box-shadow: 4px 4px 0px rgba(0,0,0,0.2);
+        }
+
+        /* --- SOCIALS --- */
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-links a {
+            font-size: 1.2rem;
+            border: var(--border-thin);
+            padding: 1rem;
+            border-bottom: var(--border-thin); /* Reset link style */
+        }
+        
+        .social-links a:hover {
+            box-shadow: 5px 5px 0px var(--accent-color);
+            transform: translate(-2px, -2px);
+        }
+
+        /* --- MOBILE RESPONSIVENESS --- */
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
+            .bio-grid { grid-template-columns: 1fr; }
+            body { padding: 10px; }
+            .container { box-shadow: 5px 5px 0px var(--accent-color); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <header>
+            <h1>MICHAEL CHANCE</h1>
+            <div class="subtitle">>> ASPIRING DEVELOPER // MD, US</div>
+        </header>
+
+        <section id="about">
+            <h2 class="section-title">01. STATUS_REPORT</h2>
+            <div class="bio-grid">
+                <div class="bio-text">
+                    <p>
+                        Born and raised in Maryland. I am a hardworking and detailed developer focused on building functional, robust software. 
+                    </p>
+                    <p>
+                        I approach coding with an amiable but disciplined mindset. I believe in clean architecture and raw functionality.
+                    </p>
+                </div>
+                <div class="bio-stats">
+                    <div class="stat-box">
+                        <span class="stat-label">CURRENT_READING:</span>
+                        The Starfishers Trilogy (Sci-Fi)
+                    </div>
+                    <div class="stat-box" style="margin-top: -2px;"> <span class="stat-label">HOBBIES:</span>
+                        <ul class="hobbies">
+                            <li>Music Production</li>
+                            <li>Gaming</li>
+                            <li>Sci-Fi Literature</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">02. DEPLOYMENTS</h2>
+            <div class="project-list">
+                
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>PROJECT_ALPHA</h3>
+                        <span>[Python / Automation]</span>
+                    </div>
+                    <p>A script designed to automate daily file sorting tasks. Utilizes OS libraries to organize messy directories based on file extensions.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>WEB_SCRAPER_V1</h3>
+                        <span>[JavaScript / Node.js]</span>
+                    </div>
+                    <p>Industrial data collection tool. Scrapes public pricing data from target e-commerce sites and outputs to CSV format.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                </article>
+
+                <article class="project-card">
+                    <div class="project-header">
+                        <h3>AUDIO_VISUALIZER</h3>
+                        <span>[C++ / Graphics]</span>
+                    </div>
+                    <p>Real-time audio frequency visualization. Combines my love for music with low-level graphics programming.</p>
+                    <a href="https://github.com/yourusername" target="_blank" class="btn">VIEW SOURCE :: GITHUB</a>
+                </article>
+
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2 class="section-title">03. COMMUNICATION</h2>
+            <p>Initiate contact protocols via the channels below:</p>
+            <div class="social-links">
+                <a href="https://github.com/yourusername" target="_blank">GITHUB</a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank">LINKEDIN</a>
+                <a href="mailto:your.email@example.com">EMAIL</a>
+            </div>
+        </section>
+
+    </div>
+
+</body>
 </html>
+
